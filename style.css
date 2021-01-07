@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+    font-size: 12px;
+    background-color: rgba(217, 214, 219, 0.336);
+    color: rgb(128, 124, 124);
+}
+
+div {
+    border-radius: 4px;
+}
+
+h1 {
+    color: rgb(61, 56, 56);
+}
+
+h2 {
+    color: rgb(75, 71, 71);
+    padding: 0 15px 0 15px;
+    font-weight: bolder;
+    font-size: small;
+}
+
+h3 {
+    font-weight: lighter;
+    padding: 0 15px 0 15px;
+    font-size: smaller;
+}
+
+input {
+    width: 100%;
+    border-style: none;
+}
+
+ul {
+    margin: 20px;
+    line-height: 3;
+    
+}
+
+button {
+    background-color: rgba(217, 214, 219, 0.336);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+}
+button:disabled {
+    color: rgba(164, 162, 165, 0.336);
+}
+
+.main {
+    width: max(70%, 600px);
+    height: auto;
+    display: grid;
+    grid-gap: 3px;
+    grid-template-rows: 130px 25px 80px 50px;
+    grid-template-columns: 0.5 0.5;
+    grid-template-areas:
+        'title title'
+        'banner banner'
+        'search search'
+        'results nominations';
+}
+
+.card {
+    background-color: rgb(255, 255, 255);
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(170, 170, 170, 0.582);
+    box-shadow: 0px 0px 1px 0px rgba(170, 170, 170, 0.397);
+    padding: 5px;
+}
+
+.mainTitle  { 
+    grid-area: title;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.banner {
+    grid-area: banner;
+}
+.search     { grid-area: search;}
+.searchResults { grid-area: results;}
+.nominationResults { grid-area: nominations;}
+
+.searchBar {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(170, 170, 170, 0.397);
+    margin: 2px 15px 10px 15px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#magnifyingglass {
+    display: inline-block;
+    fill: currentColor;
+    line-height: 24px;
+    position: relative;
+    margin-top: 3px;
+    color: #9aa0a6;
+    height: 20px;
+    width: 20px;
+}
