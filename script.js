@@ -1,6 +1,6 @@
+const input = document.querySelector("input[class='mainInput']");
 const resultsCardDiv = document.querySelector(".searchResults");
 const nominationsCardDiv = document.querySelector(".nominationResults");
-const input = document.querySelector("input[class='mainInput']");
 let nomStack = [];
 
 const resultsList = document.createElement("ul");
@@ -19,16 +19,18 @@ function getResults(e) {
         request.send();
         request.onload = function () {
             currentResult = request.response;
-            updateResults(currentResult);
+            if (currentResult.Response == "False") {
+                showErrorMessage();
+            } else {
+                updateResults(currentResult);
+            }
+            
         };
     } 
 }
 
 function updateResults(responseObj) {
-    let list = Array.from(document.querySelectorAll(".searchResult"));
-    for (i=0; i<list.length; i++) { //clear area from previous search
-        if (list[i]) list[i].remove();
-    }
+    clearPrevSearch();
 
     for (let key in  responseObj.Search) {
         const movie = responseObj.Search[key];
@@ -48,62 +50,109 @@ function updateResults(responseObj) {
         listItem.appendChild(nomButton);
         resultsList.appendChild(listItem);
     }
+    toggleCompletion();
 }
 
-function addNomination(e) {
-    let canNominate = true;
-    if (nomStack.length >= 5) canNominate = false;
-    for (i=0; i<=nomStack.length; i++) {
-        if (nomStack[i]==this.dataset.movie) canNominate = false;
-    }
-    
-    if (canNominate) {
-        const origItem = document.querySelector(`[data-movieResults="${this.dataset.movie}"]`);
-        const sourceButton = origItem.querySelector("button");
-        sourceButton.disabled = "true";
-        const listItem = origItem.cloneNode(true);
-        listItem.setAttribute("data-movieNominated", this.dataset.movie);
-        listItem.className = "nominationResult";
-        listItem.querySelector("button").remove();
-        const unNomButton = document.createElement("button");
-        unNomButton.className = "unNomButton";
-        unNomButton.setAttribute("data-movie", this.dataset.movie);
-        unNomButton.addEventListener("mousedown", removeNomination);
-        unNomButton.textContent = "Remove";
-    
-        listItem.appendChild(unNomButton);
-        nominationList.appendChild(listItem);
+function showErrorMessage() {
+    clearPrevSearch();
+    const message = document.createElement("li");
+    message.textContent = "Please be more specific";
+    message.className = "searchResult";
+    resultsList.appendChild(message);
+}
 
-        nomStack.push(this.dataset.movie);
-    }
+function addNomination(e) { 
+    const origItem = document.querySelector(`[data-movieResults="${this.dataset.movie}"]`);
+    const sourceButton = origItem.querySelector("button");
+    sourceButton.disabled = "true";
 
-    if (nomStack.length==5) {
-        const banner = document.querySelector(".banner");
-        banner.style = "display: block";
-    }
+    const listItem = origItem.cloneNode(true); //deep clone
+    listItem.setAttribute("data-movieNominated", this.dataset.movie);
+    listItem.className = "nominationResult";
+    listItem.querySelector("button").remove();
+
+    const unNomButton = document.createElement("button");
+    unNomButton.className = "unNomButton";
+    unNomButton.setAttribute("data-movie", this.dataset.movie);
+    unNomButton.addEventListener("mousedown", removeNomination);
+    unNomButton.textContent = "Remove";
+    listItem.appendChild(unNomButton);
+
+    nominationList.appendChild(listItem);
+
+    nomStack.push(this.dataset.movie);
+
+    toggleCompletion();
 }
 
 function removeNomination(e) {
     const listItem = document.querySelector(`[data-movieNominated="${this.dataset.movie}"]`);
-    listItem.remove();
+    listItem.remove();  //remove from display
 
-    for (i=0; i<=nomStack.length; i++) {
+    for (i=0; i<=nomStack.length; i++) {    //remove from memory
         if (nomStack[i]==this.dataset.movie) {
             nomStack.splice(i, 1);
         }
     }
 
-    let list = Array.from(document.querySelectorAll(".searchResult"));
-    for (i=0; i<list.length; i++) { 
-        if(list[i].dataset.movieresults==this.dataset.movie){
-            list[i].querySelector("button").disabled = false;
-        }
-    }
+    toggleCompletion();
+}
 
-    if (nomStack.length < 5) {
-        const banner = document.querySelector(".banner");
+
+function toggleCompletion() {
+    toggleBanner();
+    toggleSubmit();
+    toggleDisables();
+}
+
+function toggleBanner() {
+    const banner = document.querySelector(".banner");
+    if (nomStack.length >= 5) {
+        banner.style = "display: block";
+    } else {
         banner.style = "display: none";
     }
 }
 
+function toggleSubmit() {
+    const btn = document.querySelector(".submitBtn");
+    if (nomStack.length >= 5) {
+        btn.disabled = false;
+        btn.style = "display: block";
+        btn.addEventListener("mousedown", showOutcome);
+    } else {
+        btn.disabled = true;
+        btn.style = "display: none";
+    }
+}
 
+function toggleDisables() {
+    const searchResults = Array.from(document.querySelectorAll(".searchResult"));
+
+    if (nomStack.length >= 5) {
+        for (i=0; i<searchResults.length; i++) { 
+            searchResults[i].querySelector("button").disabled = true;
+        }
+    } else {
+        for (i=0; i<searchResults.length; i++) { 
+            searchResults[i].querySelector("button").disabled = false;
+            for (j=0; j<nomStack.length; j++) {
+                if(searchResults[i].dataset.movieresults==nomStack[j]){
+                    searchResults[i].querySelector("button").disabled = true;
+                }
+            }
+        }
+    }
+}
+
+function clearPrevSearch() {
+    let searchResults = Array.from(document.querySelectorAll(".searchResult"));
+    for (i=0; i<searchResults.length; i++) {
+        if (searchResults[i]) searchResults[i].remove();
+    }
+}
+
+
+function showOutcome() {
+    
+}

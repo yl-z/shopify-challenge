@@ -1,11 +1,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
 </head>
 
 <body>
     <div class="main">
         <div class="mainTitle"><h1>The Shoppies</h1></div>
+
+        <div class="banner" style="display: none">Thanks! You've made five nominations (the maximum number)! To keep nominating, remove some previous choices.</div>
 
         <div class="search card">
 
@@ -24,15 +27,20 @@
             </div>
         </div>
 
-        <div class="searchResults card">
-            <h2 class="searchResultsTitle">One of these?</h2>
+        <div class="results">
+            <div class="searchResults card">
+                <h2 class="searchResultsTitle">One of these?</h2>
+            </div>
+    
+            <div class="nominationResults card">
+                <h2 class="NominationsTitle">Your Nominations</h2>
+                <button class="submitBtn" style="display: none" disabled>Submit</button>
+            </div>
         </div>
 
-        <div class="nominationResults card">
-            <h2 class="NominationsTitle">Your Nominations</h2>
+        <div class="feedback">
+            
         </div>
-        
-        <div class="banner" style="display: none">Thanks! You've made five nominations (the maximum number)! To keep nominating, remove some previous choices.</div>
         
     </div>
     
