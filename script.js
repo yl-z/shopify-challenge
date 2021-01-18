@@ -12,7 +12,7 @@ input.addEventListener("keydown", getResults);
 
 function getResults(e) {
     if (e.keyCode == 13) { //listen for enter key
-        let uRL = `http://www.omdbapi.com/?apikey=24585241&s='${this.value.trim()}'`;
+        let uRL = `https://www.omdbapi.com/?apikey=24585241&s='${this.value.trim()}'`;
         let request = new XMLHttpRequest();
         request.open("GET", uRL);
         request.responseType = "json";
