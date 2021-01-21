@@ -5,13 +5,21 @@
 
 <body>
     <div class="main">
-        <div class="mainTitle"><h1>The Shoppies</h1></div>
+        <div class="mainTitle">
+            <h1>
+                The Shoppies
+            </h1>
+        </div>
 
-        <div class="banner" style="display: none">Thanks! You've made five nominations (the maximum number)! To keep nominating, remove some previous choices.</div>
+        <div class="banner" style="display: none">
+            Thanks! You've made five nominations!
+        </div>
 
         <div class="search card">
 
-            <h3 class="inputBarTitle">Movie title</h2>
+            <h3 class="inputBarTitle">
+                Movie title
+            </h3>
 
             <div class="searchBar">
                 <div class="icon">
@@ -28,21 +36,38 @@
 
         <div class="results">
             <div class="searchResults card">
-                <h2 class="searchResultsTitle">One of these?</h2>
+                <h2 class="searchResultsTitle">
+                    One of these?
+                </h2>
+                <ul class="resultsList"></ul>
             </div>
     
             <div class="nominationResults card">
-                <h2 class="NominationsTitle">Your Nominations</h2>
-                <button class="submitBtn" style="display: none" disabled>Submit</button>
+                <h2 class="NominationsTitle">
+                    Your Nominations
+                </h2>
+                <ul class="nomList"></ul>
+                <button class="submitBtn" style="display: none" disabled>
+                    Submit
+                </button>
+            </div>
+
+            <div class="feedback card feedbacklayout" style="display:none">
+                <canvas id="avgRatings" class="off">
+                    density estimation of average ratings in the database and statistics of user nominations in context
+                </canvas>
+                <canvas id="numVotes" class="off">
+                    density estimation of number of ratings in the database and statistics of user nominations in context
+                </canvas>
             </div>
         </div>
 
-        <div class="feedback">
-            
-        </div>
         
     </div>
-    
 
     <script src="script.js"></script>
+    <script src="ratings.js"></script>
+    <script src="graphs.js"></script>
+    
+    
 </body>

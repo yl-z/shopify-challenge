@@ -1,12 +1,9 @@
 const input = document.querySelector("input[class='mainInput']");
 const resultsCardDiv = document.querySelector(".searchResults");
 const nominationsCardDiv = document.querySelector(".nominationResults");
+const resultsList = document.querySelector("ul.resultsList");
+const nominationsList = document.querySelector("ul.nomList");
 let nomStack = [];
-
-const resultsList = document.createElement("ul");
-const nominationList = document.createElement("ul");
-resultsCardDiv.appendChild(resultsList);
-nominationsCardDiv.appendChild(nominationList);
 
 input.addEventListener("keydown", getResults);
 
@@ -56,7 +53,9 @@ function updateResults(responseObj) {
 function showErrorMessage() {
     clearPrevSearch();
     const message = document.createElement("li");
+
     message.textContent = "Please be more specific";
+    
     message.className = "searchResult";
     resultsList.appendChild(message);
 }
@@ -78,7 +77,7 @@ function addNomination(e) {
     unNomButton.textContent = "Remove";
     listItem.appendChild(unNomButton);
 
-    nominationList.appendChild(listItem);
+    nominationsList.appendChild(listItem);
 
     nomStack.push(this.dataset.movie);
 
@@ -153,6 +152,3 @@ function clearPrevSearch() {
 }
 
 
-function showOutcome() {
-    
-}

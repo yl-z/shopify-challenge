@@ -40,7 +40,6 @@ ul {
 }
 
 button {
-    background-color: rgba(217, 214, 219, 0.336);
     border-style: solid;
     border-width: 1px;
     border-radius: 2px;
@@ -48,6 +47,13 @@ button {
 
 button:disabled {
     color: rgba(164, 162, 165, 0.336);
+}
+
+canvas {
+    margin: 10px 10px 10px 10px;
+    width: 90%;
+    background-color: aliceblue;
+    align-self: center;
 }
 
 .main {
@@ -101,14 +107,26 @@ button:disabled {
     justify-content: space-between;
     gap: 4px;
 }
-.searchResults { 
-    width: 50%;
+.searchResults {
+    flex: 1;
 }
-.nominationResults { 
-    width: 50%;
+.nominationResults{
+    flex: 1;
+}
+.feedback{
+    flex: 2;
 }
 
 .submitBtn {
-    margin: 0 0 0 15px;
-    background-color: rgb(215, 204, 228);
+    margin: 0 0 15px 15px;
+}
+
+.feedback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.off {
+    display: none;
 }
