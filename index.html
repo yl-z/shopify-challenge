@@ -53,16 +53,14 @@
             </div>
 
             <div class="feedback card feedbacklayout" style="display:none">
-                <canvas id="avgRatings" class="off">
-                    density estimation of average ratings in the database and statistics of user nominations in context
-                </canvas>
-                <canvas id="numVotes" class="off">
-                    density estimation of number of ratings in the database and statistics of user nominations in context
-                </canvas>
+                <p>Frequency of Average Ratings of All Movies on IMDB</p>
+                <svg id="avgRatings" class="off" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+                </svg>
+                <p>Frequency of Total Votes of All Movies on IMDB (log scale)</p>
+                <svg id="numVotes" class="off" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+                </svg>
             </div>
         </div>
-
-        
     </div>
 
     <script src="script.js"></script>

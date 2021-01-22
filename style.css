@@ -52,8 +52,11 @@ button:disabled {
 canvas {
     margin: 10px 10px 10px 10px;
     width: 90%;
-    background-color: aliceblue;
-    align-self: center;
+    height: 250px;
+}
+
+p {
+    padding: 2em;
 }
 
 .main {
